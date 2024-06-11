@@ -39,7 +39,28 @@ async function main() {
     },
   })
   console.log({ alice, bob })
+
+  const akshith = await prisma.user.upsert({
+    where: { number: 'akshith' },
+    update: {},
+    create: {
+      number: 'akshith',
+      password: 'akshith',
+      name: 'akshith',
+      OnRampTransaction: {
+        create: {
+          startTime: new Date(),
+          status: "Failure",
+          amount: 2000,
+          token: "123",
+          provider: "HDFC Bank",
+        },
+      },
+    },
+  })
+  console.log({akshith})
 }
+
 main()
   .then(async () => {
     await prisma.$disconnect()
